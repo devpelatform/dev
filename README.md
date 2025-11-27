@@ -13,6 +13,14 @@ A collection of utility packages for building modern SaaS applications. This mon
 | [@pelatform/storage](./packages/storage) | [![npm](https://img.shields.io/npm/v/@pelatform/storage.svg)](https://www.npmjs.com/package/@pelatform/storage) | Unified storage interface (S3, Cloudinary, R2, MinIO, etc.) |
 | [@pelatform/utils](./packages/utils)     | [![npm](https://img.shields.io/npm/v/@pelatform/utils.svg)](https://www.npmjs.com/package/@pelatform/utils)     | Common utility functions for SaaS applications              |
 
+## Tech Stack
+
+- **Package Manager**: Bun
+- **Monorepo Tool**: Turborepo
+- **Build Tool**: tsup
+- **Linting/Formatting**: Biome
+- **Language**: TypeScript
+
 ## Getting Started
 
 ### Prerequisites
@@ -24,7 +32,7 @@ A collection of utility packages for building modern SaaS applications. This mon
 
 ```bash
 # Clone the repository
-git clone https://github.com/pelatform/dev.git
+git clone https://github.com/devpelatform/dev.git
 cd dev
 
 # Install dependencies
@@ -72,18 +80,24 @@ bun types:check            # Type-check the package
 
 For detailed contribution guidelines, see [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-## Tech Stack
+## Contributing
 
-- **Package Manager**: Bun
-- **Monorepo Tool**: Turborepo
-- **Build Tool**: tsup
-- **Linting/Formatting**: Biome
-- **Language**: TypeScript
+We welcome contributions! This project is community-driven and your help makes it better.
+
+**Getting Started:**
+
+- Read the [Contributing Guide](./CONTRIBUTING.md) for development setup and guidelines
+- Check the [Code of Conduct](./CODE_OF_CONDUCT.md)
+- Browse [open issues](https://github.com/devpelatform/dev/issues) or start a [discussion](https://github.com/devpelatform/dev/discussions)
+
+## Security
+
+If you discover a security vulnerability, please send an email to **pelatformdev@gmail.com**. All security vulnerabilities will be promptly addressed.
+
+Do not report security issues through public GitHub issues.
 
 ## License
 
-MIT � [Pelatform Inc.](LICENSE)
+MIT License - see [LICENSE](./LICENSE) for details.
 
-## Contributing
-
-We welcome contributions! Please read our [Contributing Guidelines](./CONTRIBUTING.md) and [Code of Conduct](./CODE_OF_CONDUCT.md) before submitting a pull request.
+By contributing to Pelatform Dev, you agree that your contributions will be licensed under the MIT License.

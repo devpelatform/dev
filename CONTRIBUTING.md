@@ -1,6 +1,20 @@
 # Contributing to Pelatform Dev
 
-Thank you for your interest in contributing to Pelatform Dev! This document provides guidelines and instructions for contributing to this monorepo.
+Thank you for your interest in contributing to Pelatform Dev! This monorepo hosts utility packages for modern SaaS development (email, storage, and shared utils) built with TypeScript.
+
+## Code of Conduct
+
+This project and everyone participating in it is governed by our [Code of Conduct](./CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to pelatformdev@gmail.com.
+
+## Why Contribute?
+
+Pelatform Dev is a community-driven collection of packages that standardize common SaaS capabilities. Your contributions help:
+
+- Improve email templates and delivery providers
+- Enhance storage abstractions and provider integrations
+- Expand and refine shared utility functions
+- Fix bugs, improve performance, and strengthen type-safety
+- Keep documentation clear and up-to-date
 
 ## Getting Started
 
@@ -15,7 +29,7 @@ Thank you for your interest in contributing to Pelatform Dev! This document prov
 1. Fork the repository on GitHub
 2. Clone your fork locally:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/dev.git
+   git clone https://github.com/devpelatform/dev.git
    cd dev
    ```
 3. Install dependencies:
@@ -32,7 +46,7 @@ Thank you for your interest in contributing to Pelatform Dev! This document prov
 ### Running the Project
 
 ```bash
-# Run all packages in development mode
+# Run all packages in development mode (Turborepo)
 bun dev
 
 # Build all packages
@@ -41,15 +55,15 @@ bun build
 # Type-check all packages
 bun types:check
 
-# Lint and format code
+# Lint and format code (Biome)
 bun lint:format
 ```
 
 ### Working on a Specific Package
 
 ```bash
-# Navigate to the package directory
-cd packages/email  # or packages/storage, packages/utils
+# Navigate to a package directory
+cd packages/email        # or packages/storage, packages/utils
 
 # Run package-specific commands
 bun dev            # Development with watch mode
@@ -57,20 +71,32 @@ bun build          # Build the package
 bun types:check    # Type-check the package
 ```
 
+If the package includes environment variables, copy `.env.example` to `.env` and adjust values for local development.
+
 ## Code Style
 
-This project uses [Biome](https://biomejs.dev/) for linting and formatting.
+This project uses [Biome](https://biomejs.dev/) for linting and formatting to ensure consistent code quality.
+
+### Code Standards
 
 - **Indentation**: 2 spaces
 - **Line Width**: 100 characters
-- **Quotes**: Single quotes
-- **Semicolons**: Always
+- **Quotes**: Single quotes for JavaScript/TypeScript
+- **Semicolons**: Always required
 - **Trailing Commas**: All
+- **Arrow Parentheses**: Always
 
-Run the following command before committing:
+### Format and Lint
+
+Before committing, always run:
 
 ```bash
+# Format and lint in one command
 bun lint:format
+
+# Or run separately
+bun format    # Format only
+bun lint      # Lint only
 ```
 
 ## Making Changes
@@ -79,21 +105,21 @@ bun lint:format
 
 Use descriptive branch names:
 
-- `feature/add-new-email-provider` - For new features
-- `fix/storage-upload-bug` - For bug fixes
+- `feature/add-new-animation-component` - For new features
+- `fix/hook-hydration-bug` - For bug fixes
 - `docs/update-readme` - For documentation
-- `refactor/simplify-utils` - For refactoring
+- `refactor/simplify-components` - For refactoring
 
 ### Commit Messages
 
 Follow [Conventional Commits](https://www.conventionalcommits.org/):
 
 ```
-feat(email): add support for SendGrid provider
-fix(storage): resolve S3 presigned URL expiration issue
-docs(utils): update function documentation
-refactor(email): simplify template rendering logic
-test(storage): add unit tests for Cloudinary provider
+feat(animation): add new text reveal component
+fix(hook): resolve hydration mismatch in useMounted
+docs(general): update utility function documentation
+refactor(base): simplify button component variants
+test(default): add unit tests for data grid filtering
 ```
 
 **Format**: `type(scope): description`
@@ -117,7 +143,7 @@ test(storage): add unit tests for Cloudinary provider
 
 ### Testing
 
-Before submitting your changes:
+**All changes must pass the following checks** before submitting:
 
 ```bash
 # Type-check all packages
@@ -129,6 +155,13 @@ bun build
 # Lint and format
 bun lint:format
 ```
+
+Make sure:
+
+- All TypeScript types are correct
+- No build errors or warnings
+- Code follows the style guide
+- Existing functionality is not broken
 
 ## Submitting Changes
 
@@ -147,19 +180,25 @@ bun lint:format
    git push origin feature/your-feature-name
    ```
 
-3. **Create a Pull Request** on GitHub with:
+3. **Create a Pull Request** on GitHub targeting the `main` branch
 
-   - Clear title describing the change
-   - Description of what changed and why
-   - Reference any related issues (e.g., "Fixes #123")
-   - Screenshots (if applicable)
+4. **Fill in the PR template** with:
 
-4. **Wait for review**: Maintainers will review your PR and may request changes
+   - **Clear title**: Use conventional commit format (e.g., "feat(animation): add text reveal component")
+   - **Description**: Explain what changed and why
+   - **Breaking changes**: Clearly document any breaking changes
+   - **Related issues**: Reference issues (e.g., "Fixes #123", "Closes #456")
+   - **Screenshots/videos**: Add visual proof for UI changes
+   - **Testing**: Describe how you tested the changes
+
+5. **Wait for review**: Maintainers will review your PR and may request changes
+
+**Keep PRs focused**: Large pull requests are harder to review. Try to keep changes focused on a single feature or fix.
 
 ### Pull Request Checklist
 
 - [ ] Code follows the project's style guidelines
-- [ ] All tests pass (`bun types:check`)
+- [ ] Type-check succeeds (`bun types:check`)
 - [ ] Build succeeds (`bun build`)
 - [ ] Code is properly formatted (`bun lint:format`)
 - [ ] Commit messages follow conventional commits
@@ -171,10 +210,11 @@ bun lint:format
 ### Adding a New Package
 
 1. Create a new directory in `packages/`
-2. Copy the structure from an existing package
-3. Update `package.json` with appropriate metadata
+2. Copy the structure from an existing package (`packages/email`, `packages/storage`, or `packages/utils`)
+3. Update `package.json` with appropriate metadata and workspace name (e.g., `@pelatform/<name>`)
 4. Create `tsup.config.ts` for build configuration
-5. Add the package to the workspace
+5. Add TypeScript configuration (`tsconfig.json`)
+6. Add the package to the workspace (Turborepo and root `workspaces` already include `packages/*`)
 
 ### Package Structure
 
@@ -187,6 +227,7 @@ packages/your-package/
 ├── package.json          # Package metadata
 ├── tsup.config.ts        # Build configuration
 ├── tsconfig.json         # TypeScript configuration
+├── .env.example          # Environment variables (if needed)
 └── README.md             # Package documentation
 ```
 
@@ -197,7 +238,7 @@ This project uses [Changesets](https://github.com/changesets/changesets) for ver
 1. **Create a changeset**:
 
    ```bash
-   npx changeset
+   bunx changeset
    ```
 
    Follow the prompts to describe your changes.
@@ -218,18 +259,21 @@ This project uses [Changesets](https://github.com/changesets/changesets) for ver
 
    This builds and publishes all changed packages.
 
-## Code of Conduct
+## Security
 
-This project adheres to the [Contributor Covenant Code of Conduct](./CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to pelatformdev@gmail.com.
+If you discover a security vulnerability within Pelatform Dev, please send an email to pelatformdev@gmail.com. All security vulnerabilities will be promptly addressed.
 
-## Questions?
+**Do not report security issues through public GitHub issues.**
+
+## Questions and Support
 
 If you have questions or need help:
 
-- Open an issue on GitHub
-- Check existing issues and discussions
-- Review the package documentation
+- Check the [documentation](./README.md) and package READMEs
+- Search [existing issues](https://github.com/devpelatform/dev/issues) and [discussions](https://github.com/devpelatform/dev/discussions)
+- Open a new [discussion](https://github.com/devpelatform/dev/discussions) for questions
+- Open an [issue](https://github.com/devpelatform/dev/issues) for bug reports
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the MIT License.
+By contributing to Pelatform Dev, you agree that your contributions will be licensed under the MIT License.
